@@ -1,0 +1,38 @@
+<div class="card mx-auto mt-4 mb-3 position-relative" style="width: 350px;">
+  <div class="card-header">
+    <h2 class="text-body">Pokemons List</h2>
+    <!-- Search Form -->
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="d-flex align-items-center justify-content-between">
+      <select class="form-select inline-block w-auto" formControlName="type" [class.visualy-hidden]="typesLoading$ | async">
+        <option [selected]="first" [value]="type.id" *ngFor="let type of types; let first = first">
+          {{ type.name }}
+        </option>
+      </select>
+      <button type="submit" class="btn btn-warning" style="color: white;">
+        <span class="spinner-border spinner-border-sm" style="color: white;"
+              role="status" aria-hidden="true" *ngIf="byTypeLoading$ | async"></span>
+        Search by type
+      </button>
+    </form>
+  </div>
+  <!-- Pokemon List  -->
+  <div class="position-relative">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let pokemon of pokemons">
+        <a [routerLink]="'view/' + pokemon.id"
+            class="d-block possition-relative text-decoration-none text-secondary">
+          {{ pokemon.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- Pagination -->
+<div class="d-flex align-items-center justify-content-center" *ngIf="totalPokemons">
+  <ngb-pagination [collectionSize]="totalPokemons" [pageSize]="limit" [(page)]="page" [disabled]="loadingByType"
+                  [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="getPokemons($event)"></ngb-pagination>
+</div>
+<!-- Loader -->
+<app-loader *ngIf="pokemonsLoading$ | async"></app-loader>
+
+

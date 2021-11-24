@@ -1,0 +1,53 @@
+<a class="btn btn-primary m-4" routerLink="/pokemons" role="button">List</a>
+
+<div class="card mx-auto mt-4 mb-3 position-relative" style="width: 350px;" *ngIf="pokemon">
+  <div class="card-header">
+    <h2 class="text-body text-center">{{ pokemon.name | titlecase }}</h2>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center justify-content-center">
+      <img [src]="pokemon.default_img" alt="" height="80" class="me-4">
+      <img [src]="pokemon.shiny_img" alt="" height="80">
+    </li>
+    <li class="list-group-item">
+      <p>
+        <strong>Weight: </strong>
+        <span class="text-danger">{{ pokemon.weight }} g.</span>
+      </p>
+      <p>
+        <strong>Height: </strong>
+        <span class="text-danger">{{ pokemon.height }} sm</span>
+      </p>
+      <p>
+        <strong>Base Experience: </strong>
+        <span class="text-danger">{{ pokemon.base_experience }} xp</span>
+      </p>
+      <p class="mb-0">
+        <strong>Order: </strong>
+        <span class="text-danger">{{ pokemon.order }}</span>
+      </p>
+    </li>
+    <li class="list-group-item">
+      <ul class="list-unstyled d-flex flex-wrap align-items-start">
+        <li class="me-2 mt-2"><strong>Stats: </strong></li>
+        <li *ngFor="let stat of pokemon.stats" class="me-2 mt-2">
+          <div class="badge bg-success" style="width: 6rem;">
+            {{ stat }}
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="list-group-item">
+      <ul class="list-unstyled d-flex flex-wrap align-items-start">
+        <li class="me-2 mt-2"><strong>Types: </strong></li>
+        <li *ngFor="let type of pokemon.types" class="me-2 mt-2">
+          <div class="badge bg-primary" style="width: 6rem;">
+            {{ type }}
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!-- Loader -->
+<app-loader *ngIf="loaging$ | async"></app-loader>

@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+*, *::after, *::before {
+  margin: 0;
+  // padding: 0;
+  box-sizing: border-box;
+}
+
+.sr-only {
+  display: none;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
